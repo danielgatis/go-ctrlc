@@ -6,7 +6,8 @@ import (
 	"syscall"
 )
 
-func ctrlc(fn func()) {
+// Watch watches when `ctrl-c` is pressed.
+func Watch(fn func()) {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
 	go func() {
