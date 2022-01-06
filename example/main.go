@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	tick := time.Tick(time.Second)
+	tick := time.NewTicker(time.Second)
 	exit := make(chan struct{})
 
 	ctrlc.Watch(func() {
@@ -21,7 +21,7 @@ func main() {
 		case <-exit:
 			fmt.Println("bye!")
 			os.Exit(0)
-		case <-tick:
+		case <-tick.C:
 			fmt.Println(time.Now())
 		}
 	}
